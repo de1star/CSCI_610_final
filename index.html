@@ -66,10 +66,10 @@
             }else if (texType == 4){
                 fragColor = texture(theTexture, theUV);
             }else if (texType == 5){
-                color = vec3 (0.67, 0.31, 0.05);
+                color = vec3 (0.8, 0.3, 0.2);
                 // if on the edge, draw black, otherwsie, draw grey
                 if (vbc.x < 0.02 || vbc.y < 0.02 || vbc.z < 0.02) {
-                    color = vec3 (0, 0, 0);
+                    color = vec3 (0.88, 0.72, 0.45);
                 }
                 fragColor = vec4(color, 1.0);
             }else{
