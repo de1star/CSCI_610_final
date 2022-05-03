@@ -36,6 +36,7 @@
   let platTexture;
   let woodTexture;
   let brickTexture;
+  let brick2Texture;
   let curTexture = "";
 
   // rotation
@@ -183,7 +184,7 @@ function setUpTextures(){
 
     // load the actual image
     var woodImage = document.getElementById ('wood-texture')
-    platImage.crossOrigin = "";
+    woodImage.crossOrigin = "";
 
     // bind the texture so we can perform operations on it
     gl.bindTexture (gl.TEXTURE_2D, woodTexture);
@@ -205,7 +206,7 @@ function setUpTextures(){
 
     // load the actual image
     var brickImage = document.getElementById ('brick-texture')
-    platImage.crossOrigin = "";
+    brickImage.crossOrigin = "";
 
     // bind the texture so we can perform operations on it
     gl.bindTexture (gl.TEXTURE_2D, brickTexture);
@@ -218,6 +219,28 @@ function setUpTextures(){
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     brickImage.onload = () => {
         brickImage.crossOrigin = "";
+    }
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+    // get some texture space from the gpu
+    brick2Texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, brick2Texture);
+
+    // load the actual image
+    var brick2Image = document.getElementById ('brick2-texture')
+    brick2Image.crossOrigin = "";
+
+    // bind the texture so we can perform operations on it
+    gl.bindTexture (gl.TEXTURE_2D, brick2Texture);
+
+    // load the texture data
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, brick2Image.width, brick2Image.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, brick2Image);
+
+    // set texturing parameters
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    brick2Image.onload = () => {
+        brick2Image.crossOrigin = "";
     }
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 }
@@ -320,6 +343,7 @@ function drawShapes() {
 
 
     // draw cone
+    gl.uniform1i (program.uTexType, 5);
     let cone_position = glMatrix.mat4.create();
     // translation
     var translateVec = glMatrix.vec3.create();
@@ -330,12 +354,15 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec, 9, 5, 9)
     glMatrix.mat4.scale(cone_position, cone_position, scaleVec)
     gl.uniformMatrix4fv (program.uModelT, false, cone_position);
+    gl.bindTexture(gl.TEXTURE_2D, brick2Texture);
     gl.bindVertexArray(myCone.VAO);
     gl.drawElements(gl.TRIANGLES, myCone.indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1i (program.uTexType, 5);
 
 
 
     // middle bottom for ladder
+    gl.uniform1i (program.uTexType, 4);
     let cube3_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
     glMatrix.vec3.set(translateVec1, 0, -3.3, -8)
@@ -345,11 +372,11 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 18);
     glMatrix.mat4.scale(cube3_position, cube3_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube3_position);
+    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube3.VAO);
     gl.drawElements(gl.TRIANGLES, myCube3.indices.length, gl.UNSIGNED_SHORT, 0);
 
     // ladder1
-    gl.uniform1i (program.uTexType, 4);
     let cube1_position = glMatrix.mat4.create();
     // rotate
     glMatrix.mat4.rotateX (cube1_position,  cube1_position, radians(-15.0))
