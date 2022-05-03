@@ -386,7 +386,7 @@ function drawShapes() {
 
 
     // left teapot
-    gl.uniform1i (program.uTexType, 2);
+    gl.uniform1i (program.uTexType, 3);
     let teapot1_pos = glMatrix.mat4.create();
     // translate
     var translateVec1 = glMatrix.vec3.create();
@@ -400,7 +400,6 @@ function drawShapes() {
     glMatrix.mat4.scale(teapot1_pos, teapot1_pos, scaleVec3);
     // send the model matrix to the shader and draw.
     gl.uniformMatrix4fv (program.uModelT, false, teapot1_pos);
-    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(teapot1.VAO);
     gl.drawElements(gl.TRIANGLES, teapot1.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -420,7 +419,7 @@ function drawShapes() {
 
 
     // right teapot
-    gl.uniform1i (program.uTexType, 2);
+    gl.uniform1i (program.uTexType, 3);
     let teapot2_pos = glMatrix.mat4.create();
     // translate
     var translateVec1 = glMatrix.vec3.create();
@@ -434,7 +433,6 @@ function drawShapes() {
     glMatrix.mat4.scale(teapot2_pos, teapot2_pos, scaleVec3);
     // send the model matrix to the shader and draw.
     gl.uniformMatrix4fv (program.uModelT, false, teapot2_pos);
-    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(teapot2.VAO);
     gl.drawElements(gl.TRIANGLES, teapot2.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -454,7 +452,6 @@ function drawShapes() {
 
 
     // platform
-//    gl.uniform1i (program.uTheTexture, 0);
     gl.uniform1i (program.uTexType, 1);
     let table_position = glMatrix.mat4.create();
     // scale
