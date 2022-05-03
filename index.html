@@ -64,10 +64,7 @@
                 else{color = vec3 (0.88, 0.72, 0.45);}
                 fragColor = vec4(color, 1.0);
             }else if (texType == 4){
-                float a = theUV.s;
-                float b = theUV.t;
-                color = vec3 (vec3(0, 0, 1.0) * a + vec3(0, 1.0, 1.0) * (1.0-b));
-                fragColor = vec4(color, 1.0);
+                fragColor = texture(theTexture, theUV);
             }else{
                 color = vec3 (0.5, 0.5, 0.5);
                 // if on the edge, draw black, otherwsie, draw grey
@@ -99,6 +96,7 @@
     <!-- texture images -->
      <img id="plat-texture" src="platform.jpg" style="display: none;"> </img>
      <img id="wood-texture" src="wood.jpg" style="display: none;"> </img>
+    <img id="brick-texture" src="brick.jpg" style="display: none;"> </img>
 
   <script type="text/javascript">
     // Call init once the webpage has loaded

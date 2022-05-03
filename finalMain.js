@@ -35,6 +35,7 @@
   // textures
   let platTexture;
   let woodTexture;
+  let brickTexture;
   let curTexture = "";
 
   // rotation
@@ -197,6 +198,28 @@ function setUpTextures(){
         woodImage.crossOrigin = "";
     }
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+    // get some texture space from the gpu
+    brickTexture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
+
+    // load the actual image
+    var brickImage = document.getElementById ('brick-texture')
+    platImage.crossOrigin = "";
+
+    // bind the texture so we can perform operations on it
+    gl.bindTexture (gl.TEXTURE_2D, brickTexture);
+
+    // load the texture data
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, brickImage.width, brickImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, brickImage);
+
+    // set texturing parameters
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    brickImage.onload = () => {
+        brickImage.crossOrigin = "";
+    }
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 }
 
 //
@@ -338,6 +361,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 4);
     glMatrix.mat4.scale(cube1_position, cube1_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube1_position);
+    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube1.VAO);
     gl.drawElements(gl.TRIANGLES, myCube1.indices.length, gl.UNSIGNED_SHORT, 0);
 
@@ -351,6 +375,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 2);
     glMatrix.mat4.scale(cube2_position, cube2_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube2_position);
+    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube2.VAO);
     gl.drawElements(gl.TRIANGLES, myCube2.indices.length, gl.UNSIGNED_SHORT, 0);
 
@@ -366,6 +391,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 3);
     glMatrix.mat4.scale(cube10_position, cube10_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube10_position);
+    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube10.VAO);
     gl.drawElements(gl.TRIANGLES, myCube10.indices.length, gl.UNSIGNED_SHORT, 0);
 
@@ -379,6 +405,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 6.5);
     glMatrix.mat4.scale(cube11_position, cube11_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube11_position);
+    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube11.VAO);
     gl.drawElements(gl.TRIANGLES, myCube11.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
