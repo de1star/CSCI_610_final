@@ -139,7 +139,7 @@ function setUpCamera(program) {
     glMatrix.vec3.set(translateVec, 0.5, 3, -2.7)
     glMatrix.mat4.translate(viewMatrix, viewMatrix, translateVec);
     var scaleVec = glMatrix.vec3.create();
-    glMatrix.vec3.set(scaleVec, 0.5, 0.5, 0.5)
+    glMatrix.vec3.set(scaleVec, 0.6, 0.6, 0.6)
     glMatrix.mat4.scale(viewMatrix, viewMatrix, scaleVec)
     gl.uniformMatrix4fv (program.uViewT, false, viewMatrix);
 }
