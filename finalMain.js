@@ -371,7 +371,6 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 18);
     glMatrix.mat4.scale(cube3_position, cube3_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube3_position);
-    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube3.VAO);
     gl.drawElements(gl.TRIANGLES, myCube3.indices.length, gl.UNSIGNED_SHORT, 0);
 
