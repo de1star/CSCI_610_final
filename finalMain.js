@@ -385,7 +385,6 @@ function drawShapes() {
 
 
 
-
     // left teapot
     gl.uniform1i (program.uTexType, 3);
     let teapot1_pos = glMatrix.mat4.create();
