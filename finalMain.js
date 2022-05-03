@@ -375,7 +375,7 @@ function drawShapes() {
     gl.drawElements(gl.TRIANGLES, myCube3.indices.length, gl.UNSIGNED_SHORT, 0);
 
     // ladder1
-    gl.uniform1i (program.uTexType, 4);
+    gl.uniform1i (program.uTexType, 5);
     let cube1_position = glMatrix.mat4.create();
     // rotate
     glMatrix.mat4.rotateX (cube1_position,  cube1_position, radians(-15.0))
@@ -387,7 +387,6 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 4);
     glMatrix.mat4.scale(cube1_position, cube1_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube1_position);
-    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube1.VAO);
     gl.drawElements(gl.TRIANGLES, myCube1.indices.length, gl.UNSIGNED_SHORT, 0);
 
@@ -401,7 +400,6 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 2);
     glMatrix.mat4.scale(cube2_position, cube2_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube2_position);
-    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube2.VAO);
     gl.drawElements(gl.TRIANGLES, myCube2.indices.length, gl.UNSIGNED_SHORT, 0);
 
@@ -417,7 +415,6 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 3);
     glMatrix.mat4.scale(cube10_position, cube10_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube10_position);
-    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube10.VAO);
     gl.drawElements(gl.TRIANGLES, myCube10.indices.length, gl.UNSIGNED_SHORT, 0);
 
@@ -431,7 +428,6 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 4, 0.2, 6.5);
     glMatrix.mat4.scale(cube11_position, cube11_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, cube11_position);
-    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
     gl.bindVertexArray(myCube11.VAO);
     gl.drawElements(gl.TRIANGLES, myCube11.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
