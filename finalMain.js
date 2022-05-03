@@ -362,7 +362,6 @@ function drawShapes() {
 
 
     // middle bottom for ladder
-    gl.uniform1i (program.uTexType, 4);
     let cube3_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
     glMatrix.vec3.set(translateVec1, 0, -3.3, -8)
@@ -377,6 +376,7 @@ function drawShapes() {
     gl.drawElements(gl.TRIANGLES, myCube3.indices.length, gl.UNSIGNED_SHORT, 0);
 
     // ladder1
+    gl.uniform1i (program.uTexType, 4);
     let cube1_position = glMatrix.mat4.create();
     // rotate
     glMatrix.mat4.rotateX (cube1_position,  cube1_position, radians(-15.0))
