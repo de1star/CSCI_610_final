@@ -1,0 +1,139 @@
+<html>
+<head>
+    <title>CSCI-510: Assn 5 - Transformation</title>
+    
+    <!-- include vertex shaders -->
+
+    <script id="wireframe-V" type="x-shader/x-vertex">
+        #version 300 es
+        in vec3 aVertexPosition;
+        in vec3 bary;
+        in vec2 aUV;
+        uniform mat4 modelT;
+        uniform mat4 viewT;
+        uniform mat4 projT;
+        uniform vec3 theta;
+        out vec3 vbc;
+        out vec2 theUV;
+        
+        void main()
+        {
+            vec3 angles = radians( theta );
+            vec3 c = cos( angles );
+            vec3 s = sin( angles );
+            gl_Position = projT * viewT * modelT *  vec4(aVertexPosition, 1.0);
+            vbc = bary;
+            theUV = aUV;
+        }
+    </script>
+
+     <!-- wireframe fragment Shaders -->
+     <script id="wireframe-F" type="x-shader/x-fragment">
+         #version 300 es
+         precision mediump float;
+
+         in vec3 vbc;
+         in vec2 theUV;
+         
+         // Color that is the result of this shader
+         out vec4 fragColor;
+
+         // the texture to use
+         uniform sampler2D theTexture;
+
+         // texture type
+         uniform int texType;
+
+         vec3 blue = vec3(0, 0, 1.0);
+         vec3 green = vec3(0, 1.0, 1);
+         // procedure color for platform
+
+         void main(void) {
+            vec3 color;
+            if (texType == 1){
+                fragColor = texture(theTexture, theUV);
+            }else if (texType == 2){
+                float x = vbc.x;
+                float y = vbc.y;
+                float z = vbc.z;
+                if (x > 0.02){color = vec3(0.4, 0.2, 0);}
+                else{color = vec3(0, 0, 0);}
+                fragColor = vec4(color, 1.0);
+            }else if (texType == 3){
+                float x = vbc.x;
+                float y = vbc.y;
+                float z = vbc.z;
+                if (x < 0.5){color = vec3(0.8, 0.3, 0.2);}
+                else{color = vec3 (0.88, 0.72, 0.45);}
+                fragColor = vec4(color, 1.0);
+            }else if (texType == 4){
+                float a = theUV.s;
+                float b = theUV.t;
+                color = vec3 (vec3(0, 0, 1.0) * a + vec3(0, 1.0, 1.0) * (1.0-b));
+                fragColor = vec4(color, 1.0);
+            }else{
+                color = vec3 (0.5, 0.5, 0.5);
+                // if on the edge, draw black, otherwsie, draw grey
+                if (vbc.x < 0.02 || vbc.y < 0.02 || vbc.z < 0.02) {
+                    color = vec3 (1.0, 1.0, 1.0);
+                }
+                fragColor = vec4(color, 1.0);
+            }
+         }
+
+
+
+     </script>
+     
+     <!-- Matrix library and code for standard transformations -->
+     <script type="text/javascript" src="gl-matrix-min.js"></script>
+    
+    <!-- include the main final functions -->
+    <script type="text/javascript" src="./finalMain.js"></script>
+    
+    <!-- shape functions -->
+    <script type="text/javascript" src="./cgIShape.js"></script>
+    <script type="text/javascript" src="./myShapes-min.js"></script>
+    <script type="text/javascript" src="./teapot.js"></script>
+    
+    <!-- keyboard functions -->
+    <script type="text/javascript" src="./event.js"></script>
+    
+    <!-- texture images -->
+     <img id="plat-texture" src="platform.jpg" style="display: none;"> </img>
+
+  <script type="text/javascript">
+    // Call init once the webpage has loaded
+    window.onload = init;
+  </script>
+</head>
+
+<body>
+  <h1>CSCI-510: Final Exam Image</h1>
+  <table>
+      <tr>
+          <td><canvas id="webgl-canvas" width="500" height="500">
+            Your browser does not support the HTML5 canvas element.
+          </canvas></td>
+          
+          <td>
+              <h3>Controls</h3>
+              
+              <table border="1">
+              <tbody>
+              <tr>
+              <td> </td>
+              <td>List any keyboard controls here</td>
+              </tr>
+              </tbody>
+              </table>
+              
+          </td>
+      </tr>
+  </table>
+  
+  
+
+</body>
+</html>
+
