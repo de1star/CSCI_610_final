@@ -356,7 +356,7 @@ function drawShapes() {
     gl.uniformMatrix4fv (program.uModelT, false, cone_position);
     gl.bindVertexArray(myCone.VAO);
     gl.drawElements(gl.TRIANGLES, myCone.indices.length, gl.UNSIGNED_SHORT, 0);
-    gl.uniform1i (program.uTexType, 5);
+    gl.uniform1i (program.uTexType, 0);
 
 
 
