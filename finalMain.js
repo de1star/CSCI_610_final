@@ -343,7 +343,7 @@ function drawShapes() {
 
 
     // draw cone
-    gl.uniform1i (program.uTexType, 5);
+    gl.uniform1i (program.uTexType, 4);
     let cone_position = glMatrix.mat4.create();
     // translation
     var translateVec = glMatrix.vec3.create();
@@ -354,6 +354,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec, 9, 5, 9)
     glMatrix.mat4.scale(cone_position, cone_position, scaleVec)
     gl.uniformMatrix4fv (program.uModelT, false, cone_position);
+    gl.bindTexture(gl.TEXTURE_2D, brick2Texture);
     gl.bindVertexArray(myCone.VAO);
     gl.drawElements(gl.TRIANGLES, myCone.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
