@@ -50,15 +50,12 @@
 
          void main(void) {
             vec3 color;
+            // platorm
             if (texType == 1){
                 fragColor = texture(theTexture, theUV);
+            // wood
             }else if (texType == 2){
-                float x = vbc.x;
-                float y = vbc.y;
-                float z = vbc.z;
-                if (x > 0.02){color = vec3(0.4, 0.2, 0);}
-                else{color = vec3(0, 0, 0);}
-                fragColor = vec4(color, 1.0);
+                fragColor = texture(theTexture, theUV);
             }else if (texType == 3){
                 float x = vbc.x;
                 float y = vbc.y;
@@ -101,6 +98,7 @@
     
     <!-- texture images -->
      <img id="plat-texture" src="platform.jpg" style="display: none;"> </img>
+     <img id="wood-texture" src="wood.jpg" style="display: none;"> </img>
 
   <script type="text/javascript">
     // Call init once the webpage has loaded

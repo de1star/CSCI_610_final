@@ -34,6 +34,7 @@
 
   // textures
   let platTexture;
+  let woodTexture;
   let curTexture = "";
 
   // rotation
@@ -174,6 +175,28 @@ function setUpTextures(){
         platImage.crossOrigin = "";
     }
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+    // get some texture space from the gpu
+    woodTexture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
+
+    // load the actual image
+    var woodImage = document.getElementById ('wood-texture')
+    platImage.crossOrigin = "";
+
+    // bind the texture so we can perform operations on it
+    gl.bindTexture (gl.TEXTURE_2D, woodTexture);
+
+    // load the texture data
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, woodImage.width, woodImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, woodImage);
+
+    // set texturing parameters
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    woodImage.onload = () => {
+        woodImage.crossOrigin = "";
+    }
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 }
 
 //
@@ -202,6 +225,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec, 1, 1, 1)
     glMatrix.mat4.scale(sphere_position, sphere_position, scaleVec)
     gl.uniformMatrix4fv (program.uModelT, false, sphere_position);
+    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(mySphere.VAO);
     gl.drawElements(gl.TRIANGLES, mySphere.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -242,6 +266,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec, 1, 1, 1)
     glMatrix.mat4.scale(sphere2_position, sphere2_position, scaleVec)
     gl.uniformMatrix4fv (program.uModelT, false, sphere2_position);
+    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(mySphere2.VAO);
     gl.drawElements(gl.TRIANGLES, mySphere2.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -375,6 +400,7 @@ function drawShapes() {
     glMatrix.mat4.scale(teapot1_pos, teapot1_pos, scaleVec3);
     // send the model matrix to the shader and draw.
     gl.uniformMatrix4fv (program.uModelT, false, teapot1_pos);
+    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(teapot1.VAO);
     gl.drawElements(gl.TRIANGLES, teapot1.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -408,6 +434,7 @@ function drawShapes() {
     glMatrix.mat4.scale(teapot2_pos, teapot2_pos, scaleVec3);
     // send the model matrix to the shader and draw.
     gl.uniformMatrix4fv (program.uModelT, false, teapot2_pos);
+    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(teapot2.VAO);
     gl.drawElements(gl.TRIANGLES, teapot2.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -427,7 +454,7 @@ function drawShapes() {
 
 
     // platform
-    gl.uniform1i (program.uTheTexture, 0);
+//    gl.uniform1i (program.uTheTexture, 0);
     gl.uniform1i (program.uTexType, 1);
     let table_position = glMatrix.mat4.create();
     // scale
