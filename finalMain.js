@@ -215,26 +215,26 @@ function setUpTextures(){
     // flip Y for WebGL
     gl.pixelStorei (gl.UNPACK_FLIP_Y_WEBGL, true);
     
-    // get some texture space from the gpu
-    platTexture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, platTexture);
-
-    // load the actual image
-    var platImage = document.getElementById ('plat-texture')
-    platImage.crossOrigin = "";
-
-    // bind the texture so we can perform operations on it
-    gl.bindTexture (gl.TEXTURE_2D, platTexture);
-    platImage.onload = () => {
-        platImage.crossOrigin = "";
-    }
-    // load the texture data
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, platImage.width, platImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, platImage);
-
-    // set texturing parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+//    // get some texture space from the gpu
+//    platTexture = gl.createTexture();
+//    gl.bindTexture(gl.TEXTURE_2D, platTexture);
+//
+//    // load the actual image
+//    var platImage = document.getElementById ('plat-texture')
+//    platImage.crossOrigin = "";
+//
+//    // bind the texture so we can perform operations on it
+//    gl.bindTexture (gl.TEXTURE_2D, platTexture);
+//    platImage.onload = () => {
+//        platImage.crossOrigin = "";
+//    }
+//    // load the texture data
+//    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, platImage.width, platImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, platImage);
+//
+//    // set texturing parameters
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
 //    // get some texture space from the gpu
 //    woodTexture = gl.createTexture();
@@ -578,7 +578,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec3, 9, 1, 14);
     glMatrix.mat4.scale(table_position, table_position, scaleVec3)
     gl.uniformMatrix4fv (program.uModelT, false, table_position);
-    gl.bindTexture(gl.TEXTURE_2D, platTexture);
+//    gl.bindTexture(gl.TEXTURE_2D, platTexture);
     gl.bindVertexArray(table.VAO);
     gl.drawElements(gl.TRIANGLES, table.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);

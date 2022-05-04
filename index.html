@@ -76,8 +76,10 @@
          vec3 cone2 = vec3(0.96, 0.87, 0.70);
          vec3 cube1 = vec3(0.82, 0.41, 0.11);
          vec3 cube2 = vec3(0.80, 0.52, 0.24);
-         vec3 cube3 = vec3(0.5, 0, 0);
-         vec3 plat1 = vec3(0, 0.39, 0);
+         vec3 cube3 = vec3(0.5, 1, 0.6);
+         vec3 plat1 = vec3(0.7, 0.8, 0.2);
+         vec3 plat2 = vec3(0.59, 0.98, 0.59);
+         vec3 plat3 = vec3(0.2, 0.4, 0);
          vec4 curColor;
          // procedure color for platform
 
@@ -85,7 +87,15 @@
             vec3 color;
             // platorm
             if (texType == 1){
-                curColor = texture(theTexture, theUV);
+                float x = vbc.x;
+                float y = vbc.y;
+                float z = vbc.z;
+                float s = theUV.s;
+                float t = theUV.t;
+                if (x < 0.7 || y < 0.05){color = vec3(plat2 *0.6*t + plat1*(1.0-s));}
+                else{color = plat1;}
+                curColor = vec4(color, 1.0);
+                // curColor = texture(theTexture, theUV);
             // wood
             }else if (texType == 2){
                 curColor = texture(theTexture, theUV);
