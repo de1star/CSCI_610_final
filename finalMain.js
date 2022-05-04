@@ -133,7 +133,7 @@ function setUpPhong(program) {
     // they are set in setUpCamera()
     //
     let v_ambientLight = glMatrix.vec3.create();
-    glMatrix.vec3.set(v_ambientLight, 1, 1, 1);
+    glMatrix.vec3.set(v_ambientLight, 0.9, 0.3, 0.3);
     gl.uniform3fv(program.ambientLight, v_ambientLight);
 
     let v_lightPosition = glMatrix.vec3.create();
@@ -145,7 +145,7 @@ function setUpPhong(program) {
     gl.uniform3fv(program.lightColor, v_lightColor);
 
     let v_baseColor = glMatrix.vec3.create();
-    glMatrix.vec3.set(v_baseColor, 0.5, 0.5, 0.5);
+    glMatrix.vec3.set(v_baseColor, 0.9, 0, 0);
     gl.uniform3fv(program.baseColor, v_baseColor);
 
     let v_specHighlightColor = glMatrix.vec3.create();
