@@ -95,7 +95,7 @@
             }else if (texType == 4){
                 float s = theUV.s;
                 float t = theUV.t;
-                curColor = vec3(cone1 * s + cone2 * (1.0-t), 1.0);
+                curColor = vec4(cone1 * s + cone2 * (1.0-t), 1.0);
             }else if (texType == 5){
                 color = vec3 (0.8, 0.3, 0.2);
                 // if on the edge, draw black, otherwsie, draw grey
