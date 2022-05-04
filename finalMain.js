@@ -137,7 +137,7 @@ function setUpPhong(program) {
     gl.uniform3fv(program.ambientLight, v_ambientLight);
 
     let v_lightPosition = glMatrix.vec3.create();
-    glMatrix.vec3.set(v_lightPosition, 4, 0.5, 0);
+    glMatrix.vec3.set(v_lightPosition, 4, -2, 0);
     gl.uniform3fv(program.lightPosition, v_lightPosition);
 
     let v_lightColor = glMatrix.vec3.create();
