@@ -8,7 +8,7 @@
         #version 300 es
         in vec3 aVertexPosition;
         in vec3 bary;
-        in aNormal;
+        in vec3 aNormal;
         in vec2 aUV;
         uniform mat4 modelT;
         uniform mat4 viewT;
@@ -16,6 +16,7 @@
         uniform vec3 theta;
         out vec3 vbc;
         out vec2 theUV;
+        out vec3 theColor;
 
         uniform vec3 ambientLight;
         uniform vec3 lightPosition;
