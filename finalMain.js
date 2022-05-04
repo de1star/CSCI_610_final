@@ -153,7 +153,7 @@ function setUpPhong(program) {
     gl.uniform3fv(program.specHighlightColor, v_specHighlightColor);
 
     let ka = gl.getUniformLocation(program, 'ka');
-    gl.uniform1f(program.ka, 0.5);
+    gl.uniform1f(program.ka, 0.1);
 
     let kd = gl.getUniformLocation(program, 'kd');
     gl.uniform1f(program.kd, 0.1);
