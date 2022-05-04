@@ -119,6 +119,65 @@ function createShapes() {
 }
 
 
+function setUpPhong(program) {
+
+
+    // Recall that you must set the program to be current using
+    // the gl useProgram function
+    gl.useProgram (program);
+
+    //
+    // set values for all your uniform variables
+    // including the model transform
+    // but not your view and projection transforms as
+    // they are set in setUpCamera()
+    //
+    let v_ambientLight = glMatrix.vec3.create();
+    glMatrix.vec3.set(v_ambientLight, 1, 1, 1);
+    gl.uniform3fv(program.ambientLight, v_ambientLight);
+
+    let v_lightPosition = glMatrix.vec3.create();
+    glMatrix.vec3.set(v_lightPosition, 0.5, 0.5, 0);
+    gl.uniform3fv(program.lightPosition, v_lightPosition);
+
+    let v_lightColor = glMatrix.vec3.create();
+    glMatrix.vec3.set(v_lightColor, 0.8, 0.8, 0.8);
+    gl.uniform3fv(program.lightColor, v_lightColor);
+
+    let v_baseColor = glMatrix.vec3.create();
+    glMatrix.vec3.set(v_baseColor, 0.5, 0.5, 0.5);
+    gl.uniform3fv(program.baseColor, v_baseColor);
+
+    let v_specHighlightColor = glMatrix.vec3.create();
+    glMatrix.vec3.set(v_specHighlightColor, 1, 1, 1);
+    gl.uniform3fv(program.specHighlightColor, v_specHighlightColor);
+
+    let ka = gl.getUniformLocation(program, 'ka');
+    gl.uniform1f(program.ka, 0.5);
+
+    let kd = gl.getUniformLocation(program, 'kd');
+    gl.uniform1f(program.kd, 0.5);
+
+    let ks = gl.getUniformLocation(program, 'ks');
+    gl.uniform1f(program.ks, 0.5);
+
+    let ke = gl.getUniformLocation(program, 'ke');
+    gl.uniform1f(program.ke, 10);
+
+    // set up your model transform...Add transformations
+    // if you are moiving, scaling, or rotating the object.
+    // Default is no transformations at all (identity matrix).
+    //
+    let modelMatrix = glMatrix.mat4.create();
+    let scaleVec = glMatrix.vec3.create();
+    glMatrix.vec3.set(scaleVec, 4, 4, 4)
+    glMatrix.mat4.scale(modelMatrix, modelMatrix, scaleVec)
+    gl.uniformMatrix4fv (program.uModelT, false, modelMatrix);
+
+
+}
+
+
 //
 // Here you set up your camera position, orientation, and projection
 // Remember that your projection and view matrices are sent to the vertex shader
@@ -627,6 +686,15 @@ function drawShapes() {
     program.uTheTexture = gl.getUniformLocation (program, 'theTexture');
     program.uTexType = gl.getUniformLocation(program, 'texType');
     program.uTheta = gl.getUniformLocation (program, 'theta');
+    program.ambientLight = gl.getUniformLocation (program, 'ambientLight');
+    program.lightPosition = gl.getUniformLocation (program, 'lightPosition');
+    program.lightColor = gl.getUniformLocation (program, 'lightColor');
+    program.baseColor = gl.getUniformLocation (program, 'baseColor');
+    program.specHighlightColor = gl.getUniformLocation (program, 'specHighlightColor');
+    program.ka = gl.getUniformLocation (program, 'ka');
+    program.kd = gl.getUniformLocation (program, 'kd');
+    program.ks = gl.getUniformLocation (program, 'ks');
+    program.ke = gl.getUniformLocation (program, 'ke');
   }
 
 
@@ -802,6 +870,9 @@ function getShader(id) {
 
     // set up the camera
     setUpCamera(program);
+
+    // set up phong parameters
+    setUpPhong(program);
     
     // do a draw
     draw();
