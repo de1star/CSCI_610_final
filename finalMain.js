@@ -675,6 +675,7 @@ function drawShapes() {
     // We attach the location of these shader values to the program instance
     // for easy access later in the code
     program.aVertexPosition = gl.getAttribLocation(program, 'aVertexPosition');
+    program.aNormal = gl.getAttribLocation(program, 'aNormal');
     program.aUV = gl.getAttribLocation(program, 'aUV');
     program.aBary = gl.getAttribLocation(program, 'bary');
     program.uModelT = gl.getUniformLocation (program, 'modelT');
