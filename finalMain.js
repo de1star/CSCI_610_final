@@ -418,6 +418,7 @@ function drawShapes() {
     gl.bindVertexArray(myCube10.VAO);
     gl.drawElements(gl.TRIANGLES, myCube10.indices.length, gl.UNSIGNED_SHORT, 0);
 
+
     // ladder4
     let cube11_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
