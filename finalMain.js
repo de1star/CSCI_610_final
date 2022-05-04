@@ -137,7 +137,7 @@ function setUpPhong(program) {
     gl.uniform3fv(program.ambientLight, v_ambientLight);
 
     let v_lightPosition = glMatrix.vec3.create();
-    glMatrix.vec3.set(v_lightPosition, 0.5, 0.5, 0);
+    glMatrix.vec3.set(v_lightPosition, 4, 0.5, 0);
     gl.uniform3fv(program.lightPosition, v_lightPosition);
 
     let v_lightColor = glMatrix.vec3.create();
@@ -156,10 +156,10 @@ function setUpPhong(program) {
     gl.uniform1f(program.ka, 0.5);
 
     let kd = gl.getUniformLocation(program, 'kd');
-    gl.uniform1f(program.kd, 0.5);
+    gl.uniform1f(program.kd, 0.1);
 
     let ks = gl.getUniformLocation(program, 'ks');
-    gl.uniform1f(program.ks, 0.5);
+    gl.uniform1f(program.ks, 0.1);
 
     let ke = gl.getUniformLocation(program, 'ke');
     gl.uniform1f(program.ke, 10);
@@ -237,49 +237,49 @@ function setUpTextures(){
 //    }
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
-    // get some texture space from the gpu
-    woodTexture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
-
-    // load the actual image
-    var woodImage = document.getElementById ('wood-texture')
-    woodImage.crossOrigin = "";
-
-    // bind the texture so we can perform operations on it
-    gl.bindTexture (gl.TEXTURE_2D, woodTexture);
-
-    // load the texture data
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, woodImage.width, woodImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, woodImage);
-
-    // set texturing parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-//    woodImage.onload = () => {
-//        woodImage.crossOrigin = "";
-//    }
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-    // get some texture space from the gpu
-    brickTexture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
-
-    // load the actual image
-    var brickImage = document.getElementById ('brick-texture')
-    brickImage.crossOrigin = "";
-
-    // bind the texture so we can perform operations on it
-    gl.bindTexture (gl.TEXTURE_2D, brickTexture);
-
-    // load the texture data
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, brickImage.width, brickImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, brickImage);
-
-    // set texturing parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-//    brickImage.onload = () => {
-//        brickImage.crossOrigin = "";
-//    }
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+//    // get some texture space from the gpu
+//    woodTexture = gl.createTexture();
+//    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
+//
+//    // load the actual image
+//    var woodImage = document.getElementById ('wood-texture')
+//    woodImage.crossOrigin = "";
+//
+//    // bind the texture so we can perform operations on it
+//    gl.bindTexture (gl.TEXTURE_2D, woodTexture);
+//
+//    // load the texture data
+//    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, woodImage.width, woodImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, woodImage);
+//
+//    // set texturing parameters
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+////    woodImage.onload = () => {
+////        woodImage.crossOrigin = "";
+////    }
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+//
+//    // get some texture space from the gpu
+//    brickTexture = gl.createTexture();
+//    gl.bindTexture(gl.TEXTURE_2D, brickTexture);
+//
+//    // load the actual image
+//    var brickImage = document.getElementById ('brick-texture')
+//    brickImage.crossOrigin = "";
+//
+//    // bind the texture so we can perform operations on it
+//    gl.bindTexture (gl.TEXTURE_2D, brickTexture);
+//
+//    // load the texture data
+//    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, brickImage.width, brickImage.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, brickImage);
+//
+//    // set texturing parameters
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+////    brickImage.onload = () => {
+////        brickImage.crossOrigin = "";
+////    }
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
 //    // get some texture space from the gpu
 //    brick2Texture = gl.createTexture();
@@ -319,7 +319,7 @@ function drawShapes() {
     gl.activeTexture (gl.TEXTURE0);
 
     // draw sphere1
-    gl.uniform1i (program.uTexType, 2);
+    gl.uniform1i (program.uTexType, 3);
     let sphere_position = glMatrix.mat4.create();
     // translation
     var translateVec = glMatrix.vec3.create();
@@ -336,6 +336,7 @@ function drawShapes() {
     gl.uniform1i (program.uTexType, 0);
 
     // bottom for sphere1
+    gl.uniform1i (program.uTexType, 6);
     let cube4_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
     glMatrix.vec3.set(translateVec1, 4, -0.2, 0)
@@ -356,11 +357,12 @@ function drawShapes() {
     gl.uniformMatrix4fv (program.uModelT, false, cube5_position);
     gl.bindVertexArray(myCube5.VAO);
     gl.drawElements(gl.TRIANGLES, myCube5.indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1i (program.uTexType, 0);
 
 
 
     // draw sphere2
-    gl.uniform1i (program.uTexType, 2);
+    gl.uniform1i (program.uTexType, 3);
     let sphere2_position = glMatrix.mat4.create();
     // translation
     var translateVec = glMatrix.vec3.create();
@@ -377,6 +379,7 @@ function drawShapes() {
     gl.uniform1i (program.uTexType, 0);
 
     // bottom for sphere2
+    gl.uniform1i (program.uTexType, 6);
     let cube7_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
     glMatrix.vec3.set(translateVec1, -4, -0.2, 0)
@@ -398,6 +401,7 @@ function drawShapes() {
     gl.uniformMatrix4fv (program.uModelT, false, cube8_position);
     gl.bindVertexArray(myCube8.VAO);
     gl.drawElements(gl.TRIANGLES, myCube8.indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1i (program.uTexType, 0);
 
 
 
@@ -513,6 +517,7 @@ function drawShapes() {
     gl.uniform1i (program.uTexType, 0);
 
     // left bottom for teapot
+    gl.uniform1i (program.uTexType, 6);
     let cube6_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
     glMatrix.vec3.set(translateVec1, 4, -2, -7)
@@ -524,6 +529,7 @@ function drawShapes() {
     gl.uniformMatrix4fv (program.uModelT, false, cube6_position);
     gl.bindVertexArray(myCube6.VAO);
     gl.drawElements(gl.TRIANGLES, myCube6.indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1i (program.uTexType, 0);
 
 
     // right teapot
@@ -546,6 +552,7 @@ function drawShapes() {
     gl.uniform1i (program.uTexType, 0);
 
     // right bottom for teapot
+    gl.uniform1i (program.uTexType, 6);
     let cube9_position = glMatrix.mat4.create();
     var translateVec1 = glMatrix.vec3.create();
     glMatrix.vec3.set(translateVec1, -4, -2, -7)
@@ -557,6 +564,7 @@ function drawShapes() {
     gl.uniformMatrix4fv (program.uModelT, false, cube9_position);
     gl.bindVertexArray(myCube9.VAO);
     gl.drawElements(gl.TRIANGLES, myCube9.indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1i (program.uTexType, 0);
 
 
     // platform
