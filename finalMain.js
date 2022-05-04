@@ -281,27 +281,27 @@ function setUpTextures(){
 //    }
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
-    // get some texture space from the gpu
-    brick2Texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, brick2Texture);
-
-    // load the actual image
-    var brick2Image = document.getElementById ('brick2-texture')
-    brick2Image.crossOrigin = "";
-
-    // bind the texture so we can perform operations on it
-    gl.bindTexture (gl.TEXTURE_2D, brick2Texture);
-
-    // load the texture data
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, brick2Image.width, brick2Image.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, brick2Image);
-
-    // set texturing parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-//    brick2Image.onload = () => {
-//        brick2Image.crossOrigin = "";
-//    }
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+//    // get some texture space from the gpu
+//    brick2Texture = gl.createTexture();
+//    gl.bindTexture(gl.TEXTURE_2D, brick2Texture);
+//
+//    // load the actual image
+//    var brick2Image = document.getElementById ('brick2-texture')
+//    brick2Image.crossOrigin = "";
+//
+//    // bind the texture so we can perform operations on it
+//    gl.bindTexture (gl.TEXTURE_2D, brick2Texture);
+//
+//    // load the texture data
+//    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, brick2Image.width, brick2Image.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, brick2Image);
+//
+//    // set texturing parameters
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+////    brick2Image.onload = () => {
+////        brick2Image.crossOrigin = "";
+////    }
+//    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 }
 
 //
