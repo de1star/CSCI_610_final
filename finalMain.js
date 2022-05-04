@@ -330,7 +330,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec, 1, 1, 1)
     glMatrix.mat4.scale(sphere_position, sphere_position, scaleVec)
     gl.uniformMatrix4fv (program.uModelT, false, sphere_position);
-    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
+//    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(mySphere.VAO);
     gl.drawElements(gl.TRIANGLES, mySphere.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
@@ -373,7 +373,7 @@ function drawShapes() {
     glMatrix.vec3.set(scaleVec, 1, 1, 1)
     glMatrix.mat4.scale(sphere2_position, sphere2_position, scaleVec)
     gl.uniformMatrix4fv (program.uModelT, false, sphere2_position);
-    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
+//    gl.bindTexture(gl.TEXTURE_2D, woodTexture);
     gl.bindVertexArray(mySphere2.VAO);
     gl.drawElements(gl.TRIANGLES, mySphere2.indices.length, gl.UNSIGNED_SHORT, 0);
     gl.uniform1i (program.uTexType, 0);
