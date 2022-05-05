@@ -310,7 +310,7 @@ function drawShapes() {
     var scaleVec1 = glMatrix.vec3.create()
     glMatrix.vec3.set(scaleVec1, 2.5, 0.3, 2.5)
     var scaleVec2 = glMatrix.vec3.create()
-    glMatrix.vec3.set(scaleVec2, 1, 3, 1)
+    glMatrix.vec3.set(scaleVec2, 1, 3.2, 1)
 
     var current_program;
     var current_program = program;
