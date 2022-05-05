@@ -193,12 +193,12 @@ function setUpCamera(program) {
     gl.uniformMatrix4fv (program.uProjT, false, projMatrix);
 
     let viewMatrix = glMatrix.mat4.create();
-    glMatrix.mat4.lookAt(viewMatrix, [-20, 20, -80], [2, 1.5, 2], [0, 1, 0]); // -20, 20, -80
+    glMatrix.mat4.lookAt(viewMatrix, [20, 10, -80], [2, 1.5, 2], [0, 1, 0]); // -20, 20, -80
     var translateVec = glMatrix.vec3.create();
-    glMatrix.vec3.set(translateVec, 0.5, 3, -2.7)
+    glMatrix.vec3.set(translateVec, 3.5, 2, -2.7)
     glMatrix.mat4.translate(viewMatrix, viewMatrix, translateVec);
     var scaleVec = glMatrix.vec3.create();
-    glMatrix.vec3.set(scaleVec, 0.6, 0.6, 0.6)
+    glMatrix.vec3.set(scaleVec, 0.8, 0.8, 0.8)
     glMatrix.mat4.scale(viewMatrix, viewMatrix, scaleVec)
     gl.uniformMatrix4fv (program.uViewT, false, viewMatrix);
 }
